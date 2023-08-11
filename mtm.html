@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Combinação Simples</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    form {
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="number"] {
+        width: 100px;
+        padding: 5px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #result {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    @media (max-width: 600px) {
+        input[type="number"] {
+            width: 80px;
+        }
+
+        button {
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+    }
+</style>
+
+<body>
+    <h1>Calculadora de Combinação Simples</h1>
+
+    <form id="combinatoryForm">
+        <label for="n">n (total de elementos):</label>
+        <input type="number" id="n" name="n" required><br><br>
+
+        <label for="r">r (elementos selecionados):</label>
+        <input type="number" id="r" name="r" required><br><br>
+
+        <button type="button" onclick="calculateCombinations()">Calcular Combinações</button>
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        function calculateCombinations() {
+            const n = parseInt(document.getElementById("n").value);
+            const r = parseInt(document.getElementById("r").value);
+
+            if (isNaN(n) || isNaN(r) || n < 0 || r < 0 || r > n) {
+                document.getElementById("result").innerHTML = "Valores inválidos. Certifique-se de que n >= r >= 0 e r <= n.";
+                return;
+            }
+
+            const combinations = factorial(n) / (factorial(r) * factorial(n - r));
+            document.getElementById("result").innerHTML = `Combinações (${n}, ${r}): ${combinations}`;
+        }
+
+        function factorial(num) {
+            if (num === 0 || num === 1) {
+                return 1;
+            } else {
+                return num * factorial(num - 1);
+            }
+        }
+    </script>
+</body>
+
+</html>
